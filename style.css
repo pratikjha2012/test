@@ -1,0 +1,76 @@
+/* Basic styling for the feedback section */
+/* Set up the overall page layout */
+html, body {
+    height: 40%;  /* Ensure the page takes up full height */
+    margin: 0;  /* Remove default margins */
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;  /* Arrange content vertically */
+  }
+  
+  .feedback-container {
+    margin-bottom: auto;  /* Push this container to the bottom */
+    width: 50%;  /* Ensure feedback section stretches across the page */
+    padding: 20px;
+    background-color: white;
+    border-top: 1px solid #ddd;  /* Optional: Add a border at the top */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  /* Optional: Add a shadow for style */
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .feedback-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+  }
+  
+  .submit-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .feedback-list {
+    margin-top: 20px;
+  }
+  
+  .feedback-list h3 {
+    margin-bottom: 10px;
+  }
+  
+  #feedback-items {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #feedback-items li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  

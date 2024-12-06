@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>REEAL MEN</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            background-image: url('data:image/webp;base64,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')
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        /* Navigation menu styles */
+        nav {
+            background-color: #444;
+            overflow: hidden;
+        }
+
+        nav a {
+            display: inline-block;
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        nav a:hover {
+            background-color: #575757;
+        }
+
+        /* Main content styles */
+        .main-content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+        }
+
+        .main-content h2 {
+            color: #333;
+            font-size: 2em;
+        }
+
+        .main-content p {
+            color: #666;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .main-content h2 {
+                font-size: 1.8em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>REEAL MEN</h1>
+    </header>
+
+    <!-- Navigation Section -->
+    <nav>
+        <a href="#">Home
+<a href="https://chatgpt.com/" target="_blank">DONATION</a>
+
+        <a href="#">About us</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <h2>About Us</h2>
+        <p>hello everyone this is our clothing brand REEAL MEN ,we provide the best quality t shirts </p>
+        <p>.</p>
+        <stion class="text-gray-600 body-font overflow-hidden">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="lg:w-4/5 mx-auto flex flex-wrap">
+        <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" 
+        < img src="https://th.bing.com/th/id/OIP._MIFP6Lwawm70uEM1XOhFQAAAA?rs=1&pid=ImgDetMain">
+        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+          <h2 class="text-sm title-font text-gray-500 tracking-widest">REEAL MEN</h2>
+          <p> wanna change your fashion sense . you are in for a surprise ,</p>
+          <div class="flex mb-4">
+            <span class="flex items-center">
+             </div>
+          
+          <div class="flex">
+            <span class="title-font font-medium text-2xl text-gray-900">$58.00</span>
+            <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">purchase </button>
+            <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+              <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    </div>
+    
+    
+    <div class="feedback-container">
+        <h2>We'd love to hear your feedback!</h2>
+    
+        <!-- Feedback form -->
+        <form id="feedback-form" class="feedback-form">
+          <textarea id="feedback-text" placeholder="Enter your feedback..." rows="4" required></textarea><br>
+          <button type="submit" id="submit-feedback" class="submit-button">Submit Feedback</button>
+        </form>
+    
+        <div id="feedback-list" class="feedback-list">
+          <h3>Previous Feedback:</h3>
+          <ul id="feedback-items">
+            <!-- Submitted feedback will appear here -->
+          </ul>
+        </div>
+      </div>
+    
+      <script src="feedback.js"></script>
+
+    <!-- Footer Section -->
+    <footer>
+        <p> &copy 2024 . REEAL MEN. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

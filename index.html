@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Pay Integration</title>
+    <script src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        button {
+            background-color: #0070f3;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Pay with Google Pay</h1>
+    <p>Buy the Sample Item for $20</p>
+
+    <div id="google-pay-button"></div>
+
+    <script>
+        let paymentsClient = null;
+
+        // Initialize the Google Pay API client
+        function onGooglePayLoaded() {
+            paymentsClient = new google.payments.api.PaymentsClient({ environment: 'TEST' });
+
+            const paymentDataRequest = {
+                apiVersion: 2,
+                apiVersionMinor: 0,
+                allowedPaymentMethods: [{
+                    type: 'CARD',
+                    parameters: {
+                        allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                        allowedCardNetworks: ['VISA', 'MASTERCARD'],
+                    },
+                    tokenizationSpecification: {
+                        type: 'PAYMENT_GATEWAY',
+                        parameters: {
+                            'gateway': 'example', // Replace with your gateway
+                            'gatewayMerchantId': 'exampleMerchantId' // Your gateway merchant ID
+                        }
+                    }
+                }],
+                merchantInfo: {
+                    merchantName: 'Example Merchant',
+                    merchantId: 'BCR2DN6T4Q02'
+                },
+                transactionInfo: {
+                    totalPriceStatus: 'FINAL',
+                    totalPrice: '20.00',
+                    currencyCode: 'USD'
+                }
+            };
+
+            // Check if Google Pay is available
+            paymentsClient.isReadyToPay(paymentDataRequest)
+                .then(function(response) {
+                    if (response.result) {
+                        // Display Google Pay button if it's ready to pay
+                        const button = paymentsClient.createButton({
+                            onClick: onGooglePaymentButtonClicked
+                        });
+                        document.getElementById('google-pay-button').appendChild(button);
+                    }
+                })
+                .catch(function(err) {
+                    console.error('Error checking Google Pay availability', err);
+                });
+        }
+
+        // Handle Google Pay button click
+        function onGooglePaymentButtonClicked() {
+            const paymentDataRequest = {
+                apiVersion: 2,
+                apiVersionMinor: 0,
+                allowedPaymentMethods: [{
+                    type: 'CARD',
+                    parameters: {
+                        allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                        allowedCardNetworks: ['VISA', 'MASTERCARD'],
+                    },
+                    tokenizationSpecification: {
+                        type: 'PAYMENT_GATEWAY',
+                        parameters: {
+                            'gateway': 'example',
+                            'gatewayMerchantId': 'exampleMerchantId'
+                        }
+                    }
+                }],
+                merchantInfo: {
+                    merchantName: 'Example Merchant',
+                    merchantId: 'BCR2DN6T4Q02'
+                },
+                transactionInfo: {
+                    totalPriceStatus: 'FINAL',
+                    totalPrice: '20.00',
+                    currencyCode: 'USD'
+                }
+            };
+
+            paymentsClient.loadPaymentData(paymentDataRequest)
+                .then(function(paymentData) {
+                    // Process the payment token received from Google Pay
+                    processPayment(paymentData);
+                })
+                .catch(function(err) {
+                    console.error('Error loading payment data', err);
+                });
+        }
+
+        // Send the payment data to the server
+        function processPayment(paymentData) {
+            fetch('http://localhost:3000/process-payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(paymentData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Payment processed successfully!');
+                } else {
+                    alert('Payment failed: ' + data.message);
+                }
+            })
+            .catch(err => {
+                console.error('Error processing payment:', err);
+                alert('Payment failed.');
+            });
+        }
+    </script>
+
+</body>
+</html>

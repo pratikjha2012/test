@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Section</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="feedback-container">
+    <h2>We'd love to hear your feedback!</h2>
+
+    <!-- Feedback form -->
+    <form id="feedback-form" class="feedback-form">
+      <textarea id="feedback-text" placeholder="Enter your feedback..." rows="4" required></textarea><br>
+      <button type="submit" id="submit-feedback" class="submit-button">Submit Feedback</button>
+    </form>
+
+    <div id="feedback-list" class="feedback-list">
+      <h3>Previous Feedback:</h3>
+      <ul id="feedback-items">
+        <!-- Submitted feedback will appear here -->
+      </ul>
+    </div>
+  </div>
+
+  <script src="feedback.js"></script>
+</body>
+</html>

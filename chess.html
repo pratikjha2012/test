@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Chess Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(8, 60px);
+      grid-template-rows: repeat(8, 60px);
+      gap: 0;
+      border: 2px solid #333;
+    }
+    .square {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0d9b5;
+      cursor: pointer;
+    }
+    .square:nth-child(odd) {
+      background-color: #b58863;
+    }
+    .square:nth-child(even) {
+      background-color: #f0d9b5;
+    }
+    .piece {
+      font-size: 36px;
+    }
+    .selected {
+      outline: 3px solid blue;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="board" id="chessboard"></div>
+
+  <script>
+    // Chess board setup (empty squares represented by an empty string)
+    const initialBoard = [
+      ["r", "n", "b", "q", "k", "b", "n", "r"],
+      ["p", "p", "p", "p", "p", "p", "p", "p"],
+      ["", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", ""],
+      ["P", "P", "P", "P", "P", "P", "P", "P"],
+      ["R", "N", "B", "Q", "K", "B", "N", "R"]
+    ];
+
+    let selectedSquare = null;
+
+    const boardElement = document.getElementById('chessboard');
+
+    // Draw the chessboard
+    function drawBoard() {
+      boardElement.innerHTML = '';  // Clear the board
+      for (let row = 0; row < 8; row++) {
+        for (let col = 0; col < 8; col++) {
+          const square = document.createElement('div');
+          square.classList.add('square');
+          if ((row + col) % 2 === 0) {
+            square.style.backgroundColor = '#f0d9b5';  // Light squares
+          } else {
+            square.style.backgroundColor = '#b58863';  // Dark squares
+          }
+          
+          const piece = initialBoard[row][col];
+          if (piece) {
+            const pieceElement = document.createElement('span');
+            pieceElement.classList.add('piece');
+            pieceElement.textContent = getPieceSymbol(piece);
+            square.appendChild(pieceElement);
+          }
+          
+          // Add click event to select a piece or make a move
+          square.addEventListener('click', () => handleSquareClick(row, col));
+
+          boardElement.appendChild(square);
+        }
+      }
+    }
+
+    // Function to get the symbol for a piece
+    function getPieceSymbol(piece) {
+      const pieceSymbols = {
+        "P": "♙", "R": "♖", "N": "♘", "B": "♗", "Q": "♕", "K": "♔",  // White pieces
+        "p": "♟", "r": "♜", "n": "♞", "b": "♝", "q": "♛", "k": "♚"   // Black pieces
+      };
+      return pieceSymbols[piece] || "";
+    }
+
+    // Handle square click event
+    function handleSquareClick(row, col) {
+      const squareId = `${row}-${col}`;
+
+      if (selectedSquare) {
+        // If a square is selected, make the move
+        const [selectedRow, selectedCol] = selectedSquare.split('-').map(Number);
+        makeMove(selectedRow, selectedCol, row, col);
+        deselectSquare();
+      } else {
+        // If no square is selected, select the piece
+        selectedSquare = squareId;
+        document.querySelectorAll('.square').forEach((square) => {
+          square.classList.remove('selected');
+        });
+        document.querySelector(`.square:nth-child(${row * 8 + col + 1})`).classList.add('selected');
+      }
+    }
+
+    // Make a move on the board
+    function makeMove(fromRow, fromCol, toRow, toCol) {
+      const piece = initialBoard[fromRow][fromCol];
+      initialBoard[fromRow][fromCol] = '';
+      initialBoard[toRow][toCol] = piece;
+      drawBoard();
+    }
+
+    // Deselect the selected square
+    function deselectSquare() {
+      selectedSquare = null;
+      document.querySelectorAll('.square').forEach((square) => {
+        square.classList.remove('selected');
+      });
+    }
+
+    // Initial drawing of the board
+    drawBoard();
+  </script>
+</body>
+</html>
